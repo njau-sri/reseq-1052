@@ -1,35 +1,35 @@
 
-N = 1052
 MAF_MIN = 0.01
 MIS_MAX = 0.1
 HET_MAX = 0.1
 
-f1 = open("out.frq")
-f2 = open("out.hwe")
+f1 = open("plink.frq")
+f2 = open("plink.lmiss")
+f3 = open("plink.hwe")
 fout = open("filter.maf.mis.het.txt","w")
 
 f1.readline()
 f2.readline()
+f3.readline()
 
 for line1 in f1:
     line2 = f2.next()
+    line3 = f3.next()
     v1 = line1.split()
     v2 = line2.split()
+    v3 = line3.split()
 
-    maf = min(float(v1[4]),float(v1[5]))
+    maf = float(v1[4])
     if maf < MAF_MIN:
         continue
 
-    mis = 1.0 - float(v1[3]) / (N*2)
+    mis = float(v2[4])
     if mis > MIS_MAX:
         continue
 
-    w = v2[2].split("/")
-    het = float(w[1]) / N
+    het = float(v3[6])
     if het > HET_MAX:
         continue
 
-    fout.write(v1[0])
-    fout.write("\t")
     fout.write(v1[1])
     fout.write("\n")
