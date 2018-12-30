@@ -1,6 +1,6 @@
 
 MAF_MIN = 0.01
-MIS_MAX = 0.1
+MIS_MAX = 0.2
 HET_MAX = 0.1
 
 f1 = open("plink.frq")
@@ -19,7 +19,7 @@ for line1 in f1:
     v2 = line2.split()
     v3 = line3.split()
 
-    maf = float(v1[4])
+    maf = 0.0 if v1[4] == "NA" else float(v1[4])
     if maf < MAF_MIN:
         continue
 
